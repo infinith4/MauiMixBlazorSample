@@ -7,8 +7,7 @@
              x:Class="MauiMixBlazorSample.Platforms.Android.Views.QRCodeReaderPage">
     <zxing:CameraBarcodeReaderView 
         x:Name="scanner" 
-        IsDetecting="True"
-        BarcodesDetected="scanner_BarcodesDetected">
+        IsDetecting="True">
         <zxing:CameraBarcodeReaderView.Options>
             <zxingoptions:BarcodeReaderOptions AutoRotate="True"/>
         </zxing:CameraBarcodeReaderView.Options>
