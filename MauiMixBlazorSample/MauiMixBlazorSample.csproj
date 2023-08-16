@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks>net7.0-android</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -52,14 +52,15 @@
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-        <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.3.0-preview.1" />
     </ItemGroup>
-
     <ItemGroup>
       <Compile Update="MauiPages\MauiPopupPage.xaml.cs">
         <DependentUpon>MauiPopupPage.xaml</DependentUpon>
       </Compile>
     </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+        <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.3.0-preview.1" />
+	</ItemGroup>
 
     <ItemGroup>
       <MauiXaml Update="MauiPages\MauiPage.xaml">
@@ -70,4 +71,10 @@
       </MauiXaml>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Platforms\Android\Views\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Platforms\Android\Views\" />
+    </ItemGroup>
 </Project>
