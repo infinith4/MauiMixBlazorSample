@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using MauiMixBlazorSample.Data;
 using CommunityToolkit.Maui;
+#if ANDROID
 using ZXing.Net.Maui.Controls;
+#endif
 
 namespace MauiMixBlazorSample;
 
@@ -13,8 +15,10 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-			.UseBarcodeReader()
-            .ConfigureFonts(fonts =>
+#if ANDROID
+            .UseBarcodeReader()
+#endif
+			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			});

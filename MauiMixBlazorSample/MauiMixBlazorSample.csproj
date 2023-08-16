@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-android</TargetFrameworks>
+        <TargetFrameworks>net7.0-android;</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
         <OutputType>Exe</OutputType>
@@ -31,6 +32,9 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
+      <CreatePackage>false</CreatePackage>
+    </PropertyGroup>
     <ItemGroup>
         <!-- App Icon -->
         <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -53,20 +57,20 @@
         <PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     </ItemGroup>
-    <ItemGroup>
-      <Compile Update="MauiPages\MauiPopupPage.xaml.cs">
-        <DependentUpon>MauiPopupPage.xaml</DependentUpon>
-      </Compile>
-    </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
         <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.3.0-preview.1" />
 	</ItemGroup>
-
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
+        <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.3.0-preview.1" />
+	</ItemGroup>
+    
     <ItemGroup>
       <MauiXaml Update="MauiPages\MauiPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
-      <MauiXaml Update="MauiPages\MauiPopupPage.xaml">
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+      <MauiXaml Update="Platforms\Android\Views\QRCodeReaderPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
     </ItemGroup>
