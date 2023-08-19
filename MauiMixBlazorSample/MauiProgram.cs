@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MauiMixBlazorSample.Data;
 using CommunityToolkit.Maui;
-#if ANDROID
+#if __ANDROID__ || __IOS__
 using ZXing.Net.Maui.Controls;
 #endif
 
@@ -15,7 +15,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-#if ANDROID
+#if __ANDROID__ || __IOS__
             .UseBarcodeReader()
 #endif
 			.ConfigureFonts(fonts =>

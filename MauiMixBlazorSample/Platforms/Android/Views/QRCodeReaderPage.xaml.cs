@@ -6,10 +6,10 @@ public partial class QRCodeReaderPage
 	{
 		InitializeComponent();
     }
-    private void scanner_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
-    {
-        scanner.IsDetecting = false;
+    //private void scanner_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
+    //{
+    //    scanner.IsDetecting = false;
 
-        Close(e.Results[0].Value);
-    }
+    //    Close(e.Results[0].Value);
+    //}
 }

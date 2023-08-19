@@ -7,7 +7,7 @@
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="OpenPage">Open MAUI Page</button>
-@*<button class="btn btn-primary" @onclick="OpenPopup">Open MAUI Popup</button>*@
+<button class="btn btn-primary" @onclick="OpenPopup">Open MAUI Popup</button>
 
 <input @bind="resultValue"/>
 
@@ -19,15 +19,15 @@
     {
         currentCount++;
 
-        App.Current.MainPage.Navigation.PushModalAsync(new MauiPages.MauiPage());
+        App.Current.MainPage.Navigation.PushModalAsync(new MauiMixBlazorSample.MauiPages.MauiPage());
     }
 
-    //private async void OpenPopup()
-    //{
-    //    currentCount++;
+    private async void OpenPopup()
+    {
+        currentCount++;
 
-    //    var result = await App.Current.MainPage.ShowPopupAsync(new MauiPopupPage());
-    //    resultValue = result.ToString();
-    //    StateHasChanged();
-    //}
+        var result = await App.Current.MainPage.ShowPopupAsync(new MauiMixBlazorSample.Platforms.Android.Views.QRCodeReaderPage());
+        resultValue = result.ToString();
+        StateHasChanged();
+    }
 }

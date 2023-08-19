@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-android;</TargetFrameworks>
+        <TargetFrameworks>net7.0-android;net7.0-maccatalyst;net7.0-ios</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net7.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net7.0-maccatalyst;</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
-        <OutputType>Exe</OutputType>
+        <OutputType Condition="'$(TargetFramework)' != 'net7.0'">Exe</OutputType>
         <RootNamespace>MauiMixBlazorSample</RootNamespace>
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
@@ -21,7 +21,7 @@
         <ApplicationIdGuid>7D75934A-9627-40F7-8127-A32E14661CEF</ApplicationIdGuid>
 
         <!-- Versions -->
-        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+        <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
@@ -31,8 +31,13 @@
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
-
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <CreatePackage>false</CreatePackage>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
+      <CreatePackage>false</CreatePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
       <CreatePackage>false</CreatePackage>
     </PropertyGroup>
     <ItemGroup>
@@ -56,20 +61,21 @@
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+        <PackageReference Include="Camera.MAUI" Version="1.4.4" />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
         <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.3.0-preview.1" />
 	</ItemGroup>
-    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
         <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.3.0-preview.1" />
 	</ItemGroup>
     
-    <ItemGroup>
-      <MauiXaml Update="MauiPages\MauiPage.xaml">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+      <MauiXaml Update="Platforms\Android\Views\QRCodeReaderPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
     </ItemGroup>
-    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
       <MauiXaml Update="Platforms\Android\Views\QRCodeReaderPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
