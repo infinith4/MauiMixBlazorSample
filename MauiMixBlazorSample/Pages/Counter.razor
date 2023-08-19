@@ -26,8 +26,7 @@
     {
         currentCount++;
 
-        var result = await App.Current.MainPage.ShowPopupAsync(new MauiMixBlazorSample.Platforms.Android.Views.QRCodeReaderPage());
-        resultValue = result.ToString();
-        StateHasChanged();
+
+        App.Current.MainPage.Navigation.PushModalAsync(new MauiMixBlazorSample.MauiPages.MauiQRCodePage());
     }
 }
