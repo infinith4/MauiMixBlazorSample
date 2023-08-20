@@ -7,7 +7,7 @@
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="OpenPage">Open MAUI Page</button>
-<button class="btn btn-primary" @onclick="OpenPopup">Open MAUI Popup</button>
+@*<button class="btn btn-primary" @onclick="OpenPopup">Open MAUI Popup</button>*@
 <button class="btn btn-primary" @onclick="OpenPageCameraMaui">Open MAUI Page Camera.MAUI</button>
 
 <input @bind="resultValue" />
@@ -21,14 +21,6 @@
         currentCount++;
 
         App.Current.MainPage.Navigation.PushModalAsync(new MauiMixBlazorSample.MauiPages.MauiPage());
-    }
-
-    private async void OpenPopup()
-    {
-        currentCount++;
-
-
-        App.Current.MainPage.Navigation.PushModalAsync(new MauiMixBlazorSample.MauiPages.MauiQRCodePage());
     }
 
     private void OpenPageCameraMaui()

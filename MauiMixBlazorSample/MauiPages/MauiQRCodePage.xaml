@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<!--<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              xmlns:zxingoptions="clr-namespace:ZXing.Net.Maui;assembly=ZXing.Net.MAUI"
+             x:Class="MauiMixBlazorSample.MauiPages.MauiQRCodePage"
+             Title="MauiQRCodePages" BackgroundColor="Blue">-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiMixBlazorSample.MauiPages.MauiQRCodePage"
              Title="MauiQRCodePages" BackgroundColor="Blue">
     <ScrollView>
@@ -10,9 +14,9 @@
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
-        <zxing:CameraBarcodeReaderView WidthRequest="300" HeightRequest="300"
+        <!--<zxing:CameraBarcodeReaderView WidthRequest="300" HeightRequest="300"
 			x:Name="cameraBarcodeReaderView"
-			IsDetecting="True" IsTorchOn="False" BarcodesDetected="BarcodesDetected" />
+			IsDetecting="True" IsTorchOn="False" BarcodesDetected="BarcodesDetected" />-->
 
             <Label
                 x:Name="barcodeResult"

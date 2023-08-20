@@ -1,7 +1,3 @@
-#if __ANDROID__ || __IOS__
-using ZXing.Net.Maui;
-#endif
-
 using System;
 
 namespace MauiMixBlazorSample.MauiPages;
@@ -36,7 +32,7 @@ public partial class CameraMauiPage : ContentPage
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            barcodeResult.Text = $"{args.Result[0].BarcodeFormat}: {args.Result[0].Text}";
+            barcodeResult.Text = $"{args.Result[0].BarcodeFormat}";
         });
     }
 }
