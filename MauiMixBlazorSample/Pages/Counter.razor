@@ -8,8 +8,9 @@
 
 <button class="btn btn-primary" @onclick="OpenPage">Open MAUI Page</button>
 <button class="btn btn-primary" @onclick="OpenPopup">Open MAUI Popup</button>
+<button class="btn btn-primary" @onclick="OpenPageCameraMaui">Open MAUI Page Camera.MAUI</button>
 
-<input @bind="resultValue"/>
+<input @bind="resultValue" />
 
 @code {
     private string resultValue;
@@ -28,5 +29,12 @@
 
 
         App.Current.MainPage.Navigation.PushModalAsync(new MauiMixBlazorSample.MauiPages.MauiQRCodePage());
+    }
+
+    private void OpenPageCameraMaui()
+    {
+        currentCount++;
+
+        App.Current.MainPage.Navigation.PushModalAsync(new MauiMixBlazorSample.MauiPages.CameraMauiPage());
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using MauiMixBlazorSample.Data;
 using CommunityToolkit.Maui;
+using Camera.MAUI;
+
 #if __ANDROID__ || __IOS__
 using ZXing.Net.Maui;
 using ZXing.Net.Maui.Controls;
@@ -16,10 +18,11 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+			.UseMauiCameraView()
 #if __ANDROID__ || __IOS__
             .UseBarcodeReader()
 #endif
-			.ConfigureFonts(fonts =>
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			})

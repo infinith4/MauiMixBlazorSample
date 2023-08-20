@@ -9,12 +9,12 @@ public partial class MauiQRCodePage : ContentPage
 	public MauiQRCodePage()
 	{
 		InitializeComponent();
-        cameraBarcodeReaderView.Options = new BarcodeReaderOptions
-        {
-            Formats = BarcodeFormats.OneDimensional,
-            AutoRotate = true,
-            Multiple = true
-        };
+        //cameraBarcodeReaderView.Options = new BarcodeReaderOptions
+        //{
+        //    Formats = BarcodeFormats.OneDimensional,
+        //    AutoRotate = true,
+        //    Multiple = true
+        //};
     }
 
     private void Button_Clicked(object sender, EventArgs e)
