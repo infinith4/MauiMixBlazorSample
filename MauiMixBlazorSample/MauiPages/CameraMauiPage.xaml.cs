@@ -32,7 +32,7 @@ public partial class CameraMauiPage : ContentPage
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            barcodeResult.Text = $"{args.Result[0].BarcodeFormat}";
+            barcodeResult.Text = $"Text: {args.Result[0].Text}; {args.Result[0].BarcodeFormat}";
         });
     }
 }
