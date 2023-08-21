@@ -9,6 +9,7 @@
 <button class="btn btn-primary" @onclick="OpenPage">Open MAUI Page</button>
 @*<button class="btn btn-primary" @onclick="OpenPopup">Open MAUI Popup</button>*@
 <button class="btn btn-primary" @onclick="OpenPageCameraMaui">Open MAUI Page Camera.MAUI</button>
+<button class="btn btn-primary" @onclick="OpenPageCameraMauiBarcodeRendererPage">Open MAUI Page Camera.MAUI CameraMauiBarcodeRendererPage</button>
 
 <input @bind="resultValue" />
 
@@ -28,5 +29,12 @@
         currentCount++;
 
         App.Current.MainPage.Navigation.PushModalAsync(new MauiMixBlazorSample.MauiPages.CameraMauiPage());
+    }
+
+    private void OpenPageCameraMauiBarcodeRendererPage()
+    {
+        currentCount++;
+
+        App.Current.MainPage.Navigation.PushModalAsync(new MauiMixBlazorSample.MauiPages.CameraMauiBarcodeRendererPage());
     }
 }
