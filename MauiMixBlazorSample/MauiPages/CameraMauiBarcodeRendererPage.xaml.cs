@@ -11,22 +11,46 @@ public partial class CameraMauiBarcodeRendererPage : ContentPage
 	public CameraMauiBarcodeRendererPage()
 	{
 		InitializeComponent();
+
+
         var code = "https://github.com/hjam40/Camera.MAUI";
         barcodeImage.Barcode = code;
 
+    }
+    private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+    {
+        string oldText = e.OldTextValue;
+        string newText = e.NewTextValue;
+        string myText = entry.Text;
+    }
+
+    private void OnEntryCompleted(object sender, EventArgs e)
+    {
+        string text = ((Entry)sender).Text;
+    }
+
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        var code = entry.Text;
+        await WriteStreamToFileAsync(code);
+    }
+
+    public async Task WriteStreamToFileAsync(string code)
+    {
         var barcodeRenderer = new Camera.MAUI.BarcodeRenderer();
-        Microsoft.Maui.Controls.ImageSource imgSource = barcodeRenderer.EncodeBarcode(code);
-        var streamImgSource = ((Microsoft.Maui.Controls.StreamImageSource)imgSource);
-        var fileName = "aaaa.png";
-        using (Stream inStream = ConvertImageSourceToStreamAsync(imgSource).GetAwaiter().GetResult())
+        Microsoft.Maui.Controls.ImageSource imageSource = barcodeRenderer.EncodeBarcode(code);
+        var fileName = "/Users/hiroshi/projects/github/infinith4/MauiMixBlazorSample/MauiMixBlazorSample/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/aaaa.png";
+        //var str = Path.GetFullPath(fileName);
+        //Console.WriteLine("GetPathRoot:\n{0}\n", str);
+        using (Stream inStream = await ConvertImageSourceToStreamAsync(imageSource))
         using (Stream outStream = File.OpenWrite(fileName))
         {
             inStream.CopyTo(outStream);
         }
     }
+
     public async Task<Stream> ConvertImageSourceToStreamAsync(ImageSource imageSource)
     {
-        using var stream = await ((StreamImageSource)imageSource).Stream(CancellationToken.None);
-        return stream;
+        return await ((StreamImageSource)imageSource).Stream(CancellationToken.None);
     }
 }

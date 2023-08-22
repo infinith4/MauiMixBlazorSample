@@ -15,6 +15,11 @@
                  BarcodeWidth="200" BarcodeHeight="200" BarcodeMargin="5"
                  BarcodeBackground="White" BarcodeForeground="Blue"
                  BarcodeFormat="QR_CODE" />
+            <Entry x:Name="entry"
+       Placeholder="Enter text"
+       TextChanged="OnEntryTextChanged"
+       Completed="OnEntryCompleted" />
+        <Button Text="generate code png" Clicked="Button_Clicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
